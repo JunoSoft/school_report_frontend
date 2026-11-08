@@ -1,0 +1,769 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0f2744;
+  --color-ink-soft: #1e3a5f;
+  --color-forest: #0f6b4c;
+  --color-forest-soft: #148f64;
+  --color-sand: #f6f3ee;
+  --color-paper: #ffffff;
+  --color-line: #d9e0ea;
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+  --font-print: "Times New Roman", Times, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg, #eef3f8 0%, #f7f4ef 100%);
+  color: var(--color-ink);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ========== Nursery report (screen) ========== */
+.report-nursery {
+  --nr-ink: #132a45;
+  --nr-line: #1f3a5a;
+  --nr-muted: #5a6d82;
+  --nr-panel: #f4f7fb;
+  --nr-accent: #c9a227;
+  --nr-cat: #efe4cc;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  color: var(--nr-ink);
+  width: 100%;
+  max-width: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(15, 39, 68, 0.12);
+}
+
+.report-nursery .nursery-frame {
+  border: 2.5px solid var(--nr-line);
+  padding: 14px 16px 16px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(180deg, #f8fafc, #fff) border-box;
+}
+
+.report-nursery .nursery-header {
+  display: grid;
+  grid-template-columns: 96px 1fr 78px;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #d7e0ea;
+}
+
+.report-nursery .nursery-logo-wrap,
+.report-nursery .nursery-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.report-nursery .nursery-logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 2.5px solid var(--nr-line);
+  overflow: hidden;
+  background: #f8fafc;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px rgba(19, 42, 69, 0.08);
+}
+
+.report-nursery .nursery-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.report-nursery .nursery-logo-fallback {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--nr-ink);
+}
+
+.report-nursery .nursery-photo {
+  width: 72px;
+  height: 90px;
+  border: 2px solid var(--nr-line);
+  background: #f1f5f9;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px rgba(19, 42, 69, 0.08);
+}
+
+.report-nursery .nursery-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.report-nursery .nursery-photo-placeholder {
+  color: #94a3b8;
+}
+
+.report-nursery .nursery-logo-caption,
+.report-nursery .nursery-photo-caption {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nr-muted);
+}
+
+.report-nursery .nursery-brand {
+  text-align: center;
+  min-width: 0;
+}
+
+.report-nursery .nursery-gov {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nr-muted);
+  font-weight: 600;
+}
+
+.report-nursery .nursery-school-name {
+  margin: 6px 0 2px;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--nr-ink);
+}
+
+.report-nursery .nursery-school-place {
+  margin: 0;
+  font-size: 12px;
+  color: var(--nr-muted);
+  font-weight: 600;
+}
+
+.report-nursery .nursery-brand-rule {
+  width: 72px;
+  height: 3px;
+  margin: 10px auto 8px;
+  background: linear-gradient(90deg, transparent, var(--nr-accent), transparent);
+  border-radius: 2px;
+}
+
+.report-nursery .nursery-contact {
+  margin: 0;
+  font-size: 11px;
+  color: var(--nr-ink);
+}
+
+.report-nursery .nursery-card-label {
+  margin: 8px 0 0;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0f6b4c;
+  background: #e8f6ef;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.report-nursery .nursery-meta {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--nr-panel);
+  border: 1px solid #d4dee9;
+  border-left: 4px solid var(--nr-ink);
+}
+
+.report-nursery .nursery-meta-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 0.6fr 0.6fr 1fr;
+  gap: 10px 16px;
+  align-items: end;
+}
+
+.report-nursery .nursery-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.report-nursery .nursery-meta-label {
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nr-muted);
+  font-weight: 700;
+}
+
+.report-nursery .nursery-meta-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--nr-ink);
+  border-bottom: 1px solid #c5d2e0;
+  padding-bottom: 2px;
+  line-height: 1.3;
+}
+
+.report-nursery .nursery-body {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 14px;
+  align-items: start;
+}
+
+.report-nursery .nursery-marks-panel {
+  border: 1.5px solid var(--nr-line);
+  overflow: hidden;
+}
+
+.report-nursery .nursery-marks {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.report-nursery .nursery-marks th {
+  background: var(--nr-ink);
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 8px 8px;
+  border: 1px solid #0a1c30;
+  text-align: center;
+}
+
+.report-nursery .nursery-marks th.nursery-col-subject,
+.report-nursery .nursery-marks td.nursery-col-subject {
+  text-align: left;
+}
+
+.report-nursery .nursery-marks td {
+  border: 1px solid #b8c6d6;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.report-nursery .nursery-marks td.nursery-col-subject {
+  padding: 5px 10px;
+  font-weight: 600;
+  background: #fff;
+}
+
+.report-nursery .nursery-cat-row td {
+  background: var(--nr-cat) !important;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 6px 10px !important;
+  color: #5c4520;
+}
+
+.report-nursery .nursery-grade-cell {
+  height: 26px;
+  min-width: 52px;
+}
+
+.report-nursery .nursery-total-row td.nursery-col-subject {
+  background: #e8eef5;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.report-nursery .nursery-sign-row td.nursery-col-subject {
+  padding: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--nr-muted);
+  background: #fafbfd;
+}
+
+.report-nursery .nursery-sign-cell {
+  padding: 8px 12px !important;
+  background: #fafbfd;
+}
+
+.report-nursery .nursery-sign-line {
+  display: block;
+  width: 55%;
+  max-width: 220px;
+  border-bottom: 1px solid #94a3b8;
+  height: 18px;
+}
+
+.report-nursery .nursery-sign-img {
+  height: 32px;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+.report-nursery .nursery-stamp-img {
+  height: 44px;
+  max-width: 70px;
+  object-fit: contain;
+}
+
+.report-nursery .nursery-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.report-nursery .nursery-side-block {
+  border: 1.5px solid #c5d2e0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.report-nursery .nursery-side-title {
+  margin: 0;
+  padding: 7px 10px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  background: var(--nr-panel);
+  border-bottom: 1px solid #d4dee9;
+  color: var(--nr-ink);
+}
+
+.report-nursery .nursery-legend {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.report-nursery .nursery-legend th,
+.report-nursery .nursery-legend td {
+  border: 1px solid #d4dee9;
+  padding: 5px 6px;
+  text-align: left;
+}
+
+.report-nursery .nursery-legend th {
+  background: #eef3f8;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.report-nursery .nursery-legend-swatch {
+  min-width: 36px;
+  height: 22px;
+}
+
+.report-nursery .nursery-comment-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-nursery .nursery-comment-list p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--nr-ink);
+  display: grid;
+  gap: 2px;
+}
+
+.report-nursery .nursery-comment-list span {
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--nr-muted);
+}
+
+.report-nursery .nursery-head {
+  text-align: center;
+}
+
+.report-nursery .nursery-head-name {
+  margin: 10px 10px 0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.report-nursery .nursery-head-marks {
+  margin-top: 8px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.report-nursery .nursery-head-note {
+  margin: 6px 0 10px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nr-muted);
+}
+
+@media (max-width: 900px) {
+  .report-nursery .nursery-header {
+    grid-template-columns: 72px 1fr 64px;
+    gap: 10px;
+  }
+
+  .report-nursery .nursery-logo {
+    width: 68px;
+    height: 68px;
+  }
+
+  .report-nursery .nursery-photo {
+    width: 56px;
+    height: 70px;
+  }
+
+  .report-nursery .nursery-school-name {
+    font-size: 16px;
+  }
+
+  .report-nursery .nursery-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .report-nursery .nursery-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== Print ========== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  @page nursery-sheet {
+    size: A4 landscape;
+    margin: 7mm;
+  }
+
+  @page primary-sheet {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  body.class-list-printing * {
+    visibility: hidden;
+  }
+
+  body.class-list-printing .class-list-overlay {
+    position: static !important;
+    overflow: visible !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+
+  body.class-list-printing .class-list-sheet,
+  body.class-list-printing .class-list-sheet * {
+    visibility: visible;
+  }
+
+  body.class-list-printing .class-list-sheet .no-print,
+  body.class-list-printing .class-list-sheet .no-print * {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  body.class-list-printing .class-list-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .print-area {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    max-width: none !important;
+    width: 100% !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-area * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  .print-grade-cell {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print-page {
+    break-after: page;
+    page-break-after: always;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .batch-print-stack {
+    gap: 0 !important;
+  }
+
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .report-nursery,
+  .print-page:has(.report-nursery) {
+    page: nursery-sheet;
+  }
+
+  .report-primary,
+  .print-page:has(.report-primary) {
+    page: primary-sheet;
+  }
+
+  .report-nursery {
+    box-shadow: none !important;
+    max-width: none !important;
+  }
+
+  .report-nursery .nursery-frame {
+    padding: 3mm 3.5mm 3mm !important;
+    border-width: 1.5pt !important;
+  }
+
+  .report-nursery .nursery-header {
+    grid-template-columns: 18mm 1fr 16mm !important;
+    gap: 3mm !important;
+    padding-bottom: 2.5mm !important;
+    align-items: center !important;
+  }
+
+  .report-nursery .nursery-logo {
+    width: 17mm !important;
+    height: 17mm !important;
+    border-width: 1.2pt !important;
+  }
+
+  .report-nursery .nursery-photo {
+    width: 14mm !important;
+    height: 17.5mm !important;
+    border-width: 1pt !important;
+  }
+
+  .report-nursery .nursery-logo-caption,
+  .report-nursery .nursery-photo-caption {
+    font-size: 5.5pt !important;
+    gap: 1mm;
+  }
+
+  .report-nursery .nursery-logo-wrap,
+  .report-nursery .nursery-photo-wrap {
+    gap: 1mm !important;
+  }
+
+  .report-nursery .nursery-gov {
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-school-name {
+    margin: 1mm 0 0.5mm !important;
+    font-size: 12pt !important;
+  }
+
+  .report-nursery .nursery-school-place {
+    font-size: 8pt !important;
+  }
+
+  .report-nursery .nursery-brand-rule {
+    margin: 1.5mm auto 1mm !important;
+    height: 1.5pt !important;
+    width: 18mm !important;
+  }
+
+  .report-nursery .nursery-contact {
+    font-size: 7pt !important;
+  }
+
+  .report-nursery .nursery-card-label {
+    margin-top: 1.5mm !important;
+    font-size: 7pt !important;
+    padding: 1mm 3mm !important;
+  }
+
+  .report-nursery .nursery-meta {
+    margin-top: 2.5mm !important;
+    padding: 2mm 2.5mm !important;
+  }
+
+  .report-nursery .nursery-meta-grid {
+    gap: 1.5mm 3mm !important;
+  }
+
+  .report-nursery .nursery-meta-label {
+    font-size: 6pt !important;
+  }
+
+  .report-nursery .nursery-meta-value {
+    font-size: 8.5pt !important;
+  }
+
+  .report-nursery .nursery-body {
+    margin-top: 2.5mm !important;
+    grid-template-columns: 1fr 48mm !important;
+    gap: 2.5mm !important;
+  }
+
+  .report-nursery .nursery-side {
+    gap: 2mm !important;
+  }
+
+  .report-nursery .nursery-marks th {
+    padding: 1.2mm 1.5mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-marks td.nursery-col-subject {
+    padding: 0.8mm 1.5mm !important;
+    font-size: 7pt !important;
+  }
+
+  .report-nursery .nursery-cat-row td {
+    padding: 0.8mm 1.5mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-grade-cell {
+    height: 3.6mm !important;
+    min-width: 0 !important;
+  }
+
+  .report-nursery .nursery-sign-row td.nursery-col-subject {
+    padding: 1.2mm 1.5mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-sign-cell {
+    padding: 1mm 2mm !important;
+  }
+
+  .report-nursery .nursery-sign-line {
+    height: 3.5mm !important;
+  }
+
+  .report-nursery .nursery-sign-img {
+    height: 6mm !important;
+  }
+
+  .report-nursery .nursery-stamp-img {
+    height: 8mm !important;
+  }
+
+  .report-nursery .nursery-side-title {
+    padding: 1mm 1.5mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-legend th,
+  .report-nursery .nursery-legend td {
+    padding: 0.8mm 1mm !important;
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-legend-swatch {
+    height: 3.2mm !important;
+  }
+
+  .report-nursery .nursery-comment-list {
+    padding: 1.5mm !important;
+    gap: 1.2mm !important;
+  }
+
+  .report-nursery .nursery-comment-list p {
+    font-size: 6.5pt !important;
+  }
+
+  .report-nursery .nursery-comment-list span {
+    font-size: 5.5pt !important;
+  }
+
+  .report-nursery .nursery-head-name {
+    margin: 1.5mm !important;
+    font-size: 8pt !important;
+  }
+
+  .report-nursery .nursery-head-marks {
+    min-height: 8mm !important;
+    margin-top: 1mm !important;
+  }
+
+  .report-nursery .nursery-head-note {
+    margin: 1mm 0 1.5mm !important;
+    font-size: 5.5pt !important;
+  }
+
+  .report-primary {
+    padding: 0 !important;
+    font-size: 8px !important;
+    max-width: 194mm !important;
+    width: 100% !important;
+  }
+
+  .report-primary table th,
+  .report-primary table td {
+    padding: 0.4mm 0.6mm !important;
+  }
+}

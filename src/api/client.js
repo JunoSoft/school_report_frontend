@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
 })
 
 api.interceptors.request.use((config) => {
@@ -34,5 +34,6 @@ export default api
 
 export function fileUrl(path) {
   if (!path) return null
-  return `/api/files?path=${encodeURIComponent(path)}`
+  const base = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '')
+  return `${base}/files?path=${encodeURIComponent(path)}`
 }

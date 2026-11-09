@@ -32,15 +32,6 @@ function roleLabel(role) {
     .join(' ')
 }
 
-function staffInitials(name) {
-  return String(name || '')
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((part) => part.charAt(0).toUpperCase())
-    .join('') || '?'
-}
-
 export default function PeoplePage() {
   const { user, selectedLevel } = useAuth()
   const { confirm, success, error } = useFeedback()
@@ -393,56 +384,56 @@ export default function PeoplePage() {
               )}
             </form>
           )}
-          <div>
-            <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
-              <div>
-                <h2 className="text-lg font-semibold">Registered staff</h2>
-                <p className="text-sm text-ink/60">{staff.length} member{staff.length === 1 ? '' : 's'} in this school</p>
-              </div>
+          <div className="overflow-hidden rounded-2xl border border-line bg-paper">
+            <div className="border-b border-line px-4 py-3">
+              <h2 className="font-semibold">Registered staff</h2>
+              <p className="text-sm text-ink/60">{staff.length} member{staff.length === 1 ? '' : 's'} in this school</p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {staffPage.pageItems.map((u) => (
-                <article key={u.id} className="rounded-2xl border border-line bg-paper p-4 shadow-sm">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest/10 text-sm font-semibold text-forest">
-                      {staffInitials(u.fullName)}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="truncate font-semibold text-ink">{u.fullName}</h3>
-                      <p className="mt-0.5 truncate text-sm text-ink/55">{u.email}</p>
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        <span className="rounded-full bg-ink px-2.5 py-1 text-[11px] font-medium text-white">
-                          {roleLabel(u.role)}
-                        </span>
-                        {staffLevelLabels(u.levels).map((level) => (
-                          <span key={level} className="rounded-full bg-sand px-2.5 py-1 text-[11px] font-medium text-ink/80">
-                            {level}
-                          </span>
-                        ))}
-                      </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[640px] text-sm">
+                <thead className="bg-sand text-left">
+                  <tr>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Email</th>
+                    <th className="px-4 py-3">Role</th>
+                    <th className="px-4 py-3">Levels</th>
+                    {canManageStaff && <th className="px-4 py-3">Actions</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {staffPage.pageItems.map((u) => (
+                    <tr key={u.id} className="border-t border-line">
+                      <td className="px-4 py-3 font-medium">{u.fullName}</td>
+                      <td className="px-4 py-3 text-ink/70">{u.email}</td>
+                      <td className="px-4 py-3">{roleLabel(u.role)}</td>
+                      <td className="px-4 py-3">{staffLevelLabels(u.levels).join(', ')}</td>
                       {canManageStaff && (
-                        <button
-                          type="button"
-                          className="mt-3 rounded-lg bg-sand px-3 py-1.5 text-xs font-medium"
-                          onClick={() => startEditStaff(u)}
-                        >
-                          Edit
-                        </button>
+                        <td className="px-4 py-3">
+                          <button
+                            type="button"
+                            className="rounded-lg bg-sand px-2 py-1 text-xs font-medium"
+                            onClick={() => startEditStaff(u)}
+                          >
+                            Edit
+                          </button>
+                        </td>
                       )}
-                    </div>
-                  </div>
-                </article>
-              ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <PaginationBar
-              page={staffPage.page}
-              totalPages={staffPage.totalPages}
-              total={staffPage.total}
-              pageSize={staffPage.pageSize}
-              onPageChange={staffPage.setPage}
-            />
+            <div className="border-t border-line px-4 py-2">
+              <PaginationBar
+                page={staffPage.page}
+                totalPages={staffPage.totalPages}
+                total={staffPage.total}
+                pageSize={staffPage.pageSize}
+                onPageChange={staffPage.setPage}
+              />
+            </div>
             {staff.length === 0 && (
-              <div className="rounded-2xl border border-dashed border-line bg-paper px-4 py-10 text-center text-sm text-ink/60">
+              <div className="border-t border-dashed border-line px-4 py-10 text-center text-sm text-ink/60">
                 No staff registered yet.
               </div>
             )}

@@ -6,8 +6,8 @@ import { School } from 'lucide-react'
 export default function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('teacher.nursery@newlight.local')
-  const [password, setPassword] = useState('Password123!')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -36,18 +36,15 @@ export default function LoginPage() {
             <School />
           </div>
           <h1 className="text-3xl font-semibold leading-tight">School Report System</h1>
-          <p className="mt-4 text-white/80">
-            Beautiful nursery and primary report cards for every school — marks, approvals, parent access, and printable templates in one place.
+          <p className="mt-4 text-lg leading-relaxed text-white/85">
+            Where every child’s progress finds a clear voice — from nursery milestones to primary achievement.
           </p>
-          <ul className="mt-8 space-y-2 text-sm text-white/75">
-            <li>• Role-aware dashboards for teachers, head teachers, and parents</li>
-            <li>• Excel upload for nursery marks with color bands</li>
-            <li>• Official primary cards with EU / ET grading</li>
-          </ul>
+          <p className="mt-5 text-sm leading-relaxed text-white/70">
+            A calm, trusted space for teachers to record learning, for leaders to affirm results, and for families to celebrate growth — term after term, with reports that honour the journey of each learner.
+          </p>
         </div>
         <form onSubmit={onSubmit} className="flex flex-col justify-center p-10">
           <h2 className="text-2xl font-semibold text-ink">Sign in</h2>
-          <p className="mt-1 text-sm text-ink/60">Use your school email. Your role opens automatically.</p>
           <label className="mt-8 text-sm font-medium">Email</label>
           <input
             className="mt-1 rounded-xl border border-line bg-sand px-4 py-3 outline-none focus:border-forest"
@@ -71,9 +68,6 @@ export default function LoginPage() {
           >
             {busy ? 'Signing in…' : 'Continue'}
           </button>
-          <p className="mt-4 text-xs text-ink/50">
-            Dev tip: try teacher.nursery@newlight.local / Password123!
-          </p>
         </form>
       </div>
     </div>

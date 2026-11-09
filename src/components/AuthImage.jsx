@@ -11,7 +11,7 @@ export default function AuthImage({ path, alt = '', className, ...rest }) {
     }
     let objectUrl
     let cancelled = false
-    api.get('/files', { params: { path }, responseType: 'blob' })
+    api.get('/files', { params: { path }, responseType: 'blob', skipLoading: true })
       .then((res) => {
         objectUrl = URL.createObjectURL(res.data)
         if (!cancelled) setSrc(objectUrl)

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider, useAuth } from './auth/AuthContext'
 import { FeedbackProvider } from './feedback/FeedbackContext'
+import { LoadingProvider, Spinner } from './loading/LoadingContext'
 import AppShell from './components/AppShell'
 import LoginPage from './pages/LoginPage'
 import LevelSelectPage from './pages/LevelSelectPage'
@@ -19,9 +20,17 @@ import FeesPage from './pages/FeesPage'
 import NotificationsPage from './pages/NotificationsPage'
 import VerifyPage from './pages/VerifyPage'
 
+function FullPageSpinner() {
+  return (
+    <div className="grid min-h-screen place-items-center bg-gradient-to-b from-[#eef3f8] to-[#f7f4ef]">
+      <Spinner className="h-11 w-11" label="Loading…" />
+    </div>
+  )
+}
+
 function Protected({ children, roles, requireLevel }) {
   const { user, loading, selectedLevel, isSuperAdmin, isParent } = useAuth()
-  if (loading) return <div className="grid min-h-screen place-items-center">Loading…</div>
+  if (loading) return <FullPageSpinner />
   if (!user) return <Navigate to="/login" replace />
   if (roles && !roles.includes(user.role)) return <Navigate to="/login" replace />
   if (requireLevel && !isSuperAdmin && !isParent) {
@@ -33,7 +42,7 @@ function Protected({ children, roles, requireLevel }) {
 
 function HomeRedirect() {
   const { user, loading, selectedLevel } = useAuth()
-  if (loading) return <div className="grid min-h-screen place-items-center">Loading…</div>
+  if (loading) return <FullPageSpinner />
   if (!user) return <Navigate to="/login" replace />
   if (user.role === 'SUPER_ADMIN') return <Navigate to="/platform/schools" replace />
   if (user.role === 'PARENT') return <Navigate to="/parent" replace />
@@ -44,6 +53,7 @@ function HomeRedirect() {
 export default function App() {
   return (
     <AuthProvider>
+      <LoadingProvider>
       <FeedbackProvider>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
@@ -85,6 +95,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </FeedbackProvider>
+      </LoadingProvider>
     </AuthProvider>
   )
 }

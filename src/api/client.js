@@ -4,6 +4,23 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
 })
 
+let loadingHandlers = null
+
+export function bindLoadingHandlers(handlers) {
+  loadingHandlers = handlers
+}
+
+function beginLoading(config) {
+  if (config?.skipLoading) return
+  loadingHandlers?.start?.()
+  config.__loadingTracked = true
+}
+
+function endLoading(config) {
+  if (!config?.__loadingTracked) return
+  loadingHandlers?.stop?.()
+}
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -13,12 +30,17 @@ api.interceptors.request.use((config) => {
   if (level) {
     config.headers['X-School-Level'] = level
   }
+  beginLoading(config)
   return config
 })
 
 api.interceptors.response.use(
-  (res) => res,
+  (res) => {
+    endLoading(res.config)
+    return res
+  },
   (error) => {
+    endLoading(error.config)
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
